@@ -47,6 +47,10 @@ if [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
     php /app/artisan migrate --database=sqlite_media --path=database/migrations/media --force --no-interaction
 fi
 
+# A deploy can change how pages are built (ordering, fields); the props cache is
+# keyed by a version that otherwise only moves when content is saved in the admin.
+php /app/artisan content:cache-bust --quiet || echo "[init] WARNING: content:cache-bust failed"
+
 php /app/artisan storage:link --force --quiet 2>/dev/null || true
 php /app/artisan view:clear --quiet || true
 
