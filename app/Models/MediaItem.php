@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Enums\MediaCategory;
 use App\Enums\MediaType;
 use App\Models\Concerns\HasPublishedFlag;
+use App\Models\Concerns\HasSlug;
 use App\Models\Concerns\HasSyntheticFlag;
 use App\Models\Concerns\InteractsWithSiteMedia;
 use App\Models\Concerns\TouchesCacheVersion;
@@ -29,6 +30,7 @@ use Spatie\Translatable\HasTranslations;
 final class MediaItem extends Model implements HasMedia
 {
     use HasPublishedFlag;
+    use HasSlug;
     use HasSyntheticFlag;
     use HasTranslations;
     use InteractsWithSiteMedia;
@@ -66,6 +68,12 @@ final class MediaItem extends Model implements HasMedia
             'type' => MediaType::class,
             'sort' => 'integer',
         ];
+    }
+
+    /** The URL key is generated from the title/name when left empty. */
+    protected function slugAttribute(): string
+    {
+        return 'key';
     }
 
     public function getRouteKeyName(): string

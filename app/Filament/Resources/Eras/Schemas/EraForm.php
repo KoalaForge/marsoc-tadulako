@@ -9,6 +9,7 @@ use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Str;
 
 class EraForm
 {
@@ -18,8 +19,11 @@ class EraForm
             ->components([
                 TextInput::make('key')
                     ->label('Key')
-                    ->required()
-                    ->unique(ignoreRecord: true),
+                    ->required(fn (string $operation): bool => $operation === 'edit')
+                    ->unique(ignoreRecord: true)
+                    ->maxLength(80)
+                    ->dehydrateStateUsing(fn (?string $state): ?string => filled($state) ? Str::slug($state) : null)
+                    ->helperText('Kosongkan untuk dibuat otomatis dari nama, mis. return-to-marpat.'),
                 TextInput::make('name')
                     ->label('Nama')
                     ->required()

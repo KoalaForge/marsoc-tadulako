@@ -14,6 +14,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Str;
 
 class MediaItemForm
 {
@@ -25,9 +26,11 @@ class MediaItemForm
                     ->schema([
                         TextInput::make('key')
                             ->label('Key')
-                            ->required()
+                            ->required(fn (string $operation): bool => $operation === 'edit')
                             ->unique(ignoreRecord: true)
-                            ->helperText('Mis. eq-mk18-urgi — jadi bagian URL /media/{key}.'),
+                            ->maxLength(80)
+                            ->dehydrateStateUsing(fn (?string $state): ?string => filled($state) ? Str::slug($state) : null)
+                            ->helperText('Kosongkan untuk dibuat otomatis dari judul (ID), mis. foto-latihan-dasar. Jadi bagian URL /media/{key}.'),
                         Select::make('category')
                             ->label('Kategori')
                             ->options(MediaCategory::class)

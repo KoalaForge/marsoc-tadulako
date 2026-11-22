@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Enums\WeaponCategory;
 use App\Models\Concerns\HasPublishedFlag;
+use App\Models\Concerns\HasSlug;
 use App\Models\Concerns\InteractsWithSiteMedia;
 use App\Models\Concerns\TouchesCacheVersion;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,6 +22,7 @@ use Spatie\Translatable\HasTranslations;
 final class WeaponVariant extends Model implements HasMedia
 {
     use HasPublishedFlag;
+    use HasSlug;
     use HasTranslations;
     use InteractsWithSiteMedia;
     use TouchesCacheVersion;
@@ -50,6 +52,12 @@ final class WeaponVariant extends Model implements HasMedia
             'category' => WeaponCategory::class,
             'sort' => 'integer',
         ];
+    }
+
+    /** The URL key is generated from the title/name when left empty. */
+    protected function slugAttribute(): string
+    {
+        return 'key';
     }
 
     public function getRouteKeyName(): string

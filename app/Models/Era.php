@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Concerns\HasPublishedFlag;
+use App\Models\Concerns\HasSlug;
 use App\Models\Concerns\InteractsWithSiteMedia;
 use App\Models\Concerns\TouchesCacheVersion;
 use MongoDB\Laravel\Eloquent\Model;
@@ -19,6 +20,7 @@ use Spatie\Translatable\HasTranslations;
 final class Era extends Model implements HasMedia
 {
     use HasPublishedFlag;
+    use HasSlug;
     use HasTranslations;
     use InteractsWithSiteMedia;
     use TouchesCacheVersion;
@@ -52,6 +54,12 @@ final class Era extends Model implements HasMedia
         return [
             'sort' => 'integer',
         ];
+    }
+
+    /** The URL key is generated from the title/name when left empty. */
+    protected function slugAttribute(): string
+    {
+        return 'key';
     }
 
     public function getRouteKeyName(): string
