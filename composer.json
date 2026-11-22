@@ -60,6 +60,7 @@
             "@php artisan test"
         ],
         "post-autoload-dump": [
+            "@php scripts/patch-filament-mongo-search.php",
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
             "@php artisan filament:upgrade"

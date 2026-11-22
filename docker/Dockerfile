@@ -91,6 +91,14 @@ COPY docker/healthcheck      /usr/local/bin/healthcheck
 RUN chmod +x /usr/local/bin/start-container /usr/local/bin/healthcheck \
     && sed -i 's/\r$//' /usr/local/bin/start-container /usr/local/bin/healthcheck
 
+# Filament 5's apply_search_constraint() emits raw SQL that MongoDB cannot
+# compile: it crashes every ->searchable() select and the global search.
+# composer ran with --no-scripts in the vendor stage, so apply the vendor patch
+# explicitly and FAIL the build if it is missing (same guard as koalabotbe).
+RUN php scripts/patch-filament-mongo-search.php \
+    && (grep -q 'Patched for MongoDB compatibility' vendor/filament/support/src/helpers.php \
+        || (echo 'FATAL: Filament MongoDB search patch missing from image' && exit 1))
+
 # Build-time artisan work needs a throw-away .env (no secrets, no DB); it is
 # DELETED before the layer ends so only the container's real environment
 # applies at runtime — a baked .env would silently supply defaults for any
