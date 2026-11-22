@@ -24,7 +24,8 @@ const localePrefix = computed(() => page.props.locale)
   <div v-if="member" class="profile page-section">
     <Link :href="withLocale(localePrefix, '/personnel')" class="profile__back mono-data">{{ t('common.backToRoster') }}</Link>
 
-    <div class="profile__card">
+    <div class="profile__card" :class="{ 'profile__card--photo': member.portrait }">
+      <img v-if="member.portrait" :src="member.portrait" :alt="member.callsign" class="profile__portrait" />
       <img :src="logoGold" alt="" class="profile__watermark" aria-hidden="true" />
       <div class="profile__head">
         <span class="profile__callsign mono-data">{{ member.callsign }}</span>
@@ -88,6 +89,33 @@ const localePrefix = computed(() => page.props.locale)
   border: 1px solid var(--ground-line);
   border-radius: var(--radius-md);
   padding: var(--space-5);
+}
+
+/* With a photo: portrait column + the existing content in the second column.
+   Without one this block never applies and the card is exactly as before. */
+.profile__card--photo {
+  display: grid;
+  grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+  column-gap: var(--space-5);
+  align-items: start;
+}
+
+.profile__card--photo > :not(.profile__portrait):not(.profile__watermark) {
+  grid-column: 2;
+}
+
+.profile__portrait {
+  grid-column: 1;
+  grid-row: 1 / span 6;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--ground-line);
+  filter: grayscale(0.15) contrast(1.05);
+  display: block;
 }
 
 .profile__watermark {
@@ -198,6 +226,21 @@ const localePrefix = computed(() => page.props.locale)
 @media (max-width: 600px) {
   .profile__fields {
     grid-template-columns: 1fr;
+  }
+
+  .profile__card--photo {
+    grid-template-columns: 1fr;
+  }
+
+  .profile__card--photo > :not(.profile__portrait):not(.profile__watermark) {
+    grid-column: 1;
+  }
+
+  .profile__portrait {
+    grid-column: 1;
+    grid-row: auto;
+    width: 9rem;
+    margin-bottom: var(--space-3);
   }
 }
 </style>

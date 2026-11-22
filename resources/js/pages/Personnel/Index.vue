@@ -36,13 +36,19 @@ const localePrefix = computed(() => page.props.locale)
           class="record"
         >
           <img :src="logoGold" alt="" class="record__watermark" aria-hidden="true" />
-          <div class="record__head">
-            <span class="record__callsign mono-data">{{ member.callsign }}</span>
-            <span class="record__status" :class="`record__status--${member.statusKey}`">
-              {{ localized(member.status, locale) }}
-            </span>
+          <div class="record__top" :class="{ 'record__top--photo': member.portrait }">
+            <!-- Only rendered with the member's consent AND an uploaded photo. -->
+            <img v-if="member.portrait" :src="member.portrait" :alt="member.callsign" class="record__portrait" loading="lazy" />
+            <div class="record__id">
+              <div class="record__head">
+                <span class="record__callsign mono-data">{{ member.callsign }}</span>
+                <span class="record__status" :class="`record__status--${member.statusKey}`">
+                  {{ localized(member.status, locale) }}
+                </span>
+              </div>
+              <p class="record__role">{{ localized(member.role, locale) }}</p>
+            </div>
           </div>
-          <p class="record__role">{{ localized(member.role, locale) }}</p>
           <dl class="record__fields">
             <div>
               <dt>{{ t('fields.memberId') }}</dt>
@@ -108,10 +114,37 @@ const localePrefix = computed(() => page.props.locale)
   pointer-events: none;
 }
 
+/* Same vertical rhythm as before the wrapper existed (the card's flex gap). */
+.record__id {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.record__top--photo {
+  display: grid;
+  grid-template-columns: 4.25rem minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: start;
+}
+
+.record__portrait {
+  width: 4.25rem;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--ground-line);
+  filter: grayscale(0.15) contrast(1.05);
+  display: block;
+}
+
 .record__head {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.5rem;
 }
 
 .record__callsign {

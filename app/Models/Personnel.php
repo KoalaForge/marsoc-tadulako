@@ -47,6 +47,7 @@ final class Personnel extends Model implements HasMedia
         'sort',
         'is_published',
         'is_synthetic',
+        'portrait_consent',
     ];
 
     /** @var list<string> */
@@ -67,6 +68,7 @@ final class Personnel extends Model implements HasMedia
     {
         return [
             'sort' => 'integer',
+            'portrait_consent' => 'boolean',
         ];
     }
 

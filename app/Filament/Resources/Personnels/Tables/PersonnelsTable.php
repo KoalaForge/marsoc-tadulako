@@ -27,6 +27,9 @@ class PersonnelsTable
                     ->collection('portrait')
                     ->conversion('thumb')
                     ->circular(),
+                IconColumn::make('portrait_consent')
+                    ->label('Foto publik')
+                    ->boolean(),
                 TextColumn::make('callsign')
                     ->label('Callsign')
                     ->sortable(),

@@ -46,7 +46,14 @@ class PersonnelForm
                             ->label('Portrait')
                             ->collection('portrait')
                             ->image()
-                            ->imageEditor(),
+                            ->imageEditor()
+                            ->imageAspectRatio('3:4')
+                            ->automaticallyCropImagesToAspectRatio()
+                            ->maxSize(8192),
+                        Toggle::make('portrait_consent')
+                            ->label('Tampilkan foto di situs')
+                            ->helperText('Aktifkan hanya jika anggota sudah setuju fotonya dipublikasikan. Tanpa ini, foto hanya terlihat di admin.')
+                            ->default(false),
                     ])
                     ->columns(2),
 
