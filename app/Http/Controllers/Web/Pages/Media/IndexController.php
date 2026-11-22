@@ -19,7 +19,7 @@ final class IndexController extends Controller
         return Inertia::render('Media/Index', [
             'blocks' => PageContent::blocks('media'),
             'items' => CachedProps::remember('media.index', fn (): array => MediaItem::query()
-                ->where('is_published', true)->orderBy('sort')->get()
+                ->where('is_published', true)->orderByDesc('created_at')->orderBy('sort')->get()
                 ->map(fn (MediaItem $m): array => Presenter::mediaItem($m))->values()->all()),
             ...Presenter::mediaCategories(),
         ]);
