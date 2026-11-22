@@ -31,7 +31,7 @@ jobs:
       - name: Delete old container versions
         uses: actions/delete-package-versions@v5
         with:
-          package-name: 'marsoc-tadulako-be'
+          package-name: 'marsoc-tadulako'
           package-type: 'container'
           min-versions-to-keep: ${{ github.event.inputs.min_versions_to_keep || '10' }}
           delete-only-untagged-versions: 'false'

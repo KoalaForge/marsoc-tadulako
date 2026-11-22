@@ -75,7 +75,7 @@ RUN npm run build
 # ── production ───────────────────────────────────────────────────────────────
 FROM base AS production
 
-LABEL org.opencontainers.image.source="https://github.com/koalaforge/marsoc-tadulako-be"
+LABEL org.opencontainers.image.source="https://github.com/koalaforge/marsoc-tadulako"
 
 ENV APP_ENV=production \
     APP_DEBUG=false

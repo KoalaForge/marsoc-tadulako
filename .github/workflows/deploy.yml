@@ -17,7 +17,7 @@ concurrency:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: koalaforge/marsoc-tadulako-be
+  IMAGE_NAME: koalaforge/marsoc-tadulako
   DEPLOY_PATH: /root/marsoc-tadulako
 
 jobs:

@@ -1,7 +1,7 @@
 # Deploying M.R.T web
 
 Pipeline: **push to `main`** → CI gate (Pint, PHPStan L6, Pest) → build image →
-push to `ghcr.io/koalaforge/marsoc-tadulako-be` (`latest` + short sha) → scp
+push to `ghcr.io/koalaforge/marsoc-tadulako` (`latest` + short sha) → scp
 `docker-compose.yml`, `deploy.sh`, `cleanup.sh` to the server → `deploy.sh`
 (pull, graceful stop, start, wait healthy) → health check through the proxy →
 Discord notifications. Modeled on `OrkutWhatsapp5.0`; the Laravel runtime
@@ -25,12 +25,12 @@ Discord notifications. Modeled on `OrkutWhatsapp5.0`; the Laravel runtime
    `backend`; `docker ps` shows `redis` and `caddy-proxy`.
 2. `mkdir -p /root/marsoc-tadulako` and create `/root/marsoc-tadulako/.env` from
    `.env.production.example` (generate `APP_KEY` with
-   `docker run --rm ghcr.io/koalaforge/marsoc-tadulako-be:latest php artisan key:generate --show`
+   `docker run --rm ghcr.io/koalaforge/marsoc-tadulako:latest php artisan key:generate --show`
    after the first image exists, or any base64 32-byte key).
 3. Install the proxy site: copy `docker/proxy/marsoc-tadulako.caddy` to the proxy's
    `sites/` directory, replace `{$DOMAIN}`, then
    `docker exec caddy-proxy caddy reload --config /etc/caddy/Caddyfile`.
-4. GitHub → repo `koalaforge/marsoc-tadulako-be` → Settings:
+4. GitHub → repo `koalaforge/marsoc-tadulako` → Settings:
    - **Secrets**: `SSH_HOST`, `SSH_USER`, `SSH_KEY`, `SSH_PORT`, `GHCR_TOKEN`
      (read-only `read:packages` PAT), `DISCORD_WEBHOOK_URL` (optional).
    - **Variables**: `PRODUCTION_DOMAIN` (e.g. `example.com`, no scheme) — enables the
