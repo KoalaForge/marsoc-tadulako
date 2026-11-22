@@ -35,7 +35,10 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.5'
-          extensions: mongodb, redis, gd, exif, intl, zip, bcmath, pdo_sqlite, sqlite3
+          # mongodb is PINNED to 1.21.x: composer.lock holds mongodb/mongodb 1.21.x,
+          # which requires ext-mongodb ^1.21 (the unpinned latest is 2.x and fails
+          # composer's platform check). Matches the locally tested version.
+          extensions: mongodb-1.21.2, redis, gd, exif, intl, zip, bcmath, pdo_sqlite, sqlite3
           coverage: none
           tools: composer:v2
 

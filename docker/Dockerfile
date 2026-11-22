@@ -26,10 +26,12 @@ RUN apt-get update \
         git \
     && rm -rf /var/lib/apt/lists/*
 
+# mongodb is PINNED to 1.21.x to match composer.lock (mongodb/mongodb 1.21.x needs
+# ext-mongodb ^1.21; the unpinned latest ext is 2.x and breaks `composer install`).
 # mongodb: database | redis: cache/session/queue | pdo_sqlite: medialibrary DB
 # gd (+webp): image conversions | intl/zip/bcmath/exif: Filament + medialibrary
 RUN install-php-extensions \
-        mongodb \
+        mongodb-1.21.2 \
         redis \
         pdo_sqlite \
         gd \
