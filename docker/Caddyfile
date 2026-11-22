@@ -58,7 +58,11 @@
         header @static Cache-Control "public, max-age=86400"
 
         file_server @build
-        file_server @media
+        # pass_thru: a /storage/* path that is not a real file must reach Laravel
+        # (e.g. a signed local-disk URL) instead of a silent, empty 404 from Caddy.
+        file_server @media {
+            pass_thru
+        }
         file_server @static
 
         php_server {

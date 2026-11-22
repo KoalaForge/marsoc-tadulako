@@ -47,6 +47,17 @@ Discord notifications. Modeled on `OrkutWhatsapp5.0`; the Laravel runtime
    Remove the sample data later with
    `docker exec marsoc-tadulako php artisan content:purge-synthetic --force`.
 
+## Media uploaded before the disk fix
+
+Admin uploads used to land on the private `local` disk (signed URLs that 404 in the
+browser, broken images on the site). New uploads now go to the public disk. For media
+that was already uploaded, move it once:
+
+```bash
+docker exec marsoc-tadulako php artisan media:fix-disk --dry-run   # preview
+docker exec marsoc-tadulako php artisan media:fix-disk             # move + update rows
+```
+
 ## Rollback
 
 Actions → **Deploy to Production** → *Run workflow* → set `rollback_tag` to a previous
