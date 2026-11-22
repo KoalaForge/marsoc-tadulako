@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Activities\Schemas;
 
 use App\Filament\Shared\Schemas\LocaleTabs;
+use App\Models\Activity;
 use App\Models\ActivityCategory;
 use App\Models\Personnel;
 use Filament\Forms\Components\CheckboxList;
@@ -20,6 +21,20 @@ use Filament\Schemas\Schema;
 
 class ActivityForm
 {
+    /**
+     * Activity picker options for forms that reference an activity by slug.
+     *
+     * @return array<string, string> slug => title (ID)
+     */
+    public static function slugOptions(): array
+    {
+        return Activity::query()->orderBy('created_at', 'desc')->get()
+            ->mapWithKeys(fn (Activity $a): array => [
+                $a->slug => (string) ($a->getTranslation('title', 'id', useFallbackLocale: true)),
+            ])
+            ->all();
+    }
+
     public static function configure(Schema $schema): Schema
     {
         return $schema

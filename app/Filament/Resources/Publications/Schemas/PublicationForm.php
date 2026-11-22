@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Publications\Schemas;
 
+use App\Filament\Resources\Activities\Schemas\ActivityForm;
 use App\Filament\Shared\Schemas\LocaleTabs;
 use App\Models\PublicationCategory;
 use Filament\Forms\Components\DatePicker;
@@ -40,9 +41,11 @@ class PublicationForm
                             ->helperText('Teks biasa, bukan relasi — tampil apa adanya, tidak ditautkan ke profil.'),
                         DatePicker::make('published_on')
                             ->label('Tanggal Terbit'),
-                        TextInput::make('related_activity_slug')
-                            ->label('Slug Kegiatan Terkait')
-                            ->helperText('Opsional — jika artikel ini adalah laporan dari sebuah Activity.'),
+                        Select::make('related_activity_slug')
+                            ->label('Kegiatan Terkait')
+                            ->options(fn (): array => ActivityForm::slugOptions())
+                            ->searchable()
+                            ->helperText('Opsional — pilih kegiatan jika artikel ini adalah laporannya.'),
                         SpatieMediaLibraryFileUpload::make('cover')
                             ->label('Banner (opsional)')
                             ->collection('cover')

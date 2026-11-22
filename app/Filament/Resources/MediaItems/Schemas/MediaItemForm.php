@@ -6,6 +6,7 @@ namespace App\Filament\Resources\MediaItems\Schemas;
 
 use App\Enums\MediaCategory;
 use App\Enums\MediaType;
+use App\Filament\Resources\Activities\Schemas\ActivityForm;
 use App\Filament\Shared\Schemas\LocaleTabs;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -46,9 +47,11 @@ class MediaItemForm
                         TextInput::make('year_label')
                             ->label('Tahun (label)')
                             ->helperText('String bebas — boleh "Reference" untuk equipment plate tanpa tanggal.'),
-                        TextInput::make('related_activity_slug')
-                            ->label('Slug Kegiatan Terkait')
-                            ->helperText('Opsional — isi slug Activity jika foto ini mendokumentasikan kegiatan tertentu.'),
+                        Select::make('related_activity_slug')
+                            ->label('Kegiatan Terkait')
+                            ->options(fn (): array => ActivityForm::slugOptions())
+                            ->searchable()
+                            ->helperText('Opsional — pilih kegiatan jika foto ini mendokumentasikannya.'),
                     ])
                     ->columns(2),
 
