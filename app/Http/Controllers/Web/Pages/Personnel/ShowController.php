@@ -26,7 +26,7 @@ final class ShowController extends Controller
         $activities = Activity::query()
             ->where('is_published', true)
             ->where('related_member_callsigns', $member->callsign)
-            ->orderByDesc('occurred_on')
+            ->orderByDesc('created_at')
             ->get();
 
         return Inertia::render('Personnel/Show', [

@@ -19,7 +19,7 @@ final class IndexController extends Controller
         return Inertia::render('Activities/Index', [
             'blocks' => PageContent::blocks('activities'),
             'activities' => CachedProps::remember('activities.index', fn (): array => Presenter::activities(
-                Activity::query()->where('is_published', true)->orderByDesc('occurred_on')->get(),
+                Activity::query()->where('is_published', true)->orderByDesc('created_at')->get(),
             )),
         ]);
     }

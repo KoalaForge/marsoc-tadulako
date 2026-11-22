@@ -75,23 +75,33 @@ it('lets the admin leave the key empty when creating a media item, and requires 
     expect($item->fresh()->key)->toBe('seri-potret-2025');
 });
 
-it('lists media, activities and publications newest first', function (): void {
+it('lists media, activities and publications by creation time, newest first', function (): void {
     $props = function (string $path): array {
         preg_match('/<script data-page="app" type="application\/json">(.*?)<\/script>/s', $this->get($path)->getContent(), $m);
 
         return json_decode($m[1], true)['props'];
     };
 
-    foreach ([['old', 30], ['new', 1], ['mid', 10]] as [$name, $daysAgo]) {
+    // Event/publish dates deliberately run the OPPOSITE way to creation time:
+    // the feeds behave like a blog, so only created_at may decide the order.
+    foreach ([['old', 30, 1], ['new', 1, 30], ['mid', 10, 10]] as [$name, $createdDaysAgo, $dateDaysAgo]) {
+        $created = now()->subDays($createdDaysAgo);
+
         $item = MediaItem::create(mediaItemData(['key' => "order-{$name}", 'title' => ['id' => $name, 'en' => $name]]));
-        $item->created_at = now()->subDays($daysAgo);
+        $item->created_at = $created;
         $item->save();
 
-        Activity::create(['slug' => "act-{$name}", 'title' => ['id' => $name, 'en' => $name], 'occurred_on' => now()->subDays($daysAgo), 'overview' => ['id' => 'x', 'en' => 'x']]);
-        Publication::create(['slug' => "pub-{$name}", 'title' => ['id' => $name, 'en' => $name], 'excerpt' => ['id' => 'x', 'en' => 'x'], 'content' => ['id' => '<p>x</p>', 'en' => '<p>x</p>'], 'published_on' => now()->subDays($daysAgo)]);
+        $activity = Activity::create(['slug' => "act-{$name}", 'title' => ['id' => $name, 'en' => $name], 'occurred_on' => now()->subDays($dateDaysAgo), 'overview' => ['id' => 'x', 'en' => 'x']]);
+        $activity->created_at = $created;
+        $activity->save();
+
+        $publication = Publication::create(['slug' => "pub-{$name}", 'title' => ['id' => $name, 'en' => $name], 'excerpt' => ['id' => 'x', 'en' => 'x'], 'content' => ['id' => '<p>x</p>', 'en' => '<p>x</p>'], 'published_on' => now()->subDays($dateDaysAgo)]);
+        $publication->created_at = $created;
+        $publication->save();
     }
 
     expect(array_column($props('/id/media')['items'], 'id'))->toBe(['order-new', 'order-mid', 'order-old'])
         ->and(array_column($props('/id/activities')['activities'], 'slug'))->toBe(['act-new', 'act-mid', 'act-old'])
-        ->and(array_column($props('/id/publications')['publications'], 'slug'))->toBe(['pub-new', 'pub-mid', 'pub-old']);
+        ->and(array_column($props('/id/publications')['publications'], 'slug'))->toBe(['pub-new', 'pub-mid', 'pub-old'])
+        ->and(array_column($props('/id')['latestActivities'], 'slug'))->toBe(['act-new', 'act-mid', 'act-old']);
 });

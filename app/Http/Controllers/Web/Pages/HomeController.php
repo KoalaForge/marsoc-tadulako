@@ -18,7 +18,7 @@ final class HomeController extends Controller
 {
     public function __invoke(): Response
     {
-        $latest = Activity::query()->where('is_published', true)->orderByDesc('occurred_on')->limit(3)->get();
+        $latest = Activity::query()->where('is_published', true)->orderByDesc('created_at')->limit(3)->get();
         $featured = MediaItem::query()->where('is_published', true)->orderByDesc('created_at')->orderBy('sort')->limit(12)->get()
             ->filter(fn (MediaItem $m): bool => $m->getMedia('photos')->isNotEmpty())
             ->take(4)

@@ -19,7 +19,7 @@ final class IndexController extends Controller
         return Inertia::render('Publications/Index', [
             'blocks' => PageContent::blocks('publications'),
             'publications' => CachedProps::remember('publications.index', fn (): array => Publication::query()
-                ->where('is_published', true)->orderByDesc('published_on')->get()
+                ->where('is_published', true)->orderByDesc('created_at')->get()
                 ->map(fn (Publication $p): array => Presenter::publication($p))->values()->all()),
         ]);
     }
