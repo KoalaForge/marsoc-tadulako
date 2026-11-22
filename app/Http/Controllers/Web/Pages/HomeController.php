@@ -6,7 +6,9 @@ namespace App\Http\Controllers\Web\Pages;
 
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
+use App\Models\Era;
 use App\Models\MediaItem;
+use App\Models\WeaponVariant;
 use App\Support\PageContent;
 use App\Support\Presenter;
 use Inertia\Inertia;
@@ -22,11 +24,16 @@ final class HomeController extends Controller
             ->take(4)
             ->values();
 
+        $blocks = PageContent::blocks('home');
+
         return Inertia::render('Home', [
-            'blocks' => PageContent::blocks('home'),
+            'blocks' => $blocks,
             'latestActivities' => Presenter::activities($latest),
             'featuredMedia' => $featured->map(fn (MediaItem $m): array => Presenter::mediaItem($m))->all(),
-            'teaserImage' => Presenter::relativeUrl((string) MediaItem::query()->where('key', 'eq-mk18-urgi')->first()?->getFirstMediaUrl('photos', 'wide')),
+            'teaserImage' => $blocks['impression-teaser']['image'] ?? Presenter::firstPhotoUrl([
+                ...WeaponVariant::query()->with('media')->where('is_published', true)->orderBy('sort')->limit(20)->get()->all(),
+                ...Era::query()->with('media')->where('is_published', true)->orderBy('sort')->limit(20)->get()->all(),
+            ]),
         ]);
     }
 }

@@ -6,8 +6,10 @@ namespace App\Filament\Pages\Content\Schemas;
 
 use App\Filament\Shared\Schemas\LocaleGrid;
 use App\Filament\Shared\Schemas\LocaleTabs;
+use App\Models\PageBlock;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Component;
@@ -85,6 +87,23 @@ final class Blocks
                 return $rows;
             })
             ->addActionLabel('Tambah baris');
+    }
+
+    /**
+     * Optional image for a block (stored on the PageBlock document itself).
+     * The form state is not bound to a single record, so the block is
+     * resolved explicitly by its full block_key.
+     */
+    public static function image(string $blockKey, string $label, string $help = ''): SpatieMediaLibraryFileUpload
+    {
+        return SpatieMediaLibraryFileUpload::make('image_'.str_replace('.', '_', $blockKey))
+            ->label($label)
+            ->collection('image')
+            ->model(fn (): ?PageBlock => PageBlock::forKey($blockKey))
+            ->image()
+            ->imageEditor()
+            ->maxSize(8192)
+            ->helperText($help);
     }
 
     /** Bilingual text input inside a repeater row. */

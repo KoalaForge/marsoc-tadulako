@@ -67,6 +67,9 @@ trait InteractsWithPageBlocks
             $blocks->get($suffix)?->fill($attributes)->save();
         }
 
+        // Image uploads are bound to their own block (see Blocks::image()).
+        $this->form->saveRelationships();
+
         Notification::make()
             ->title('Perubahan disimpan')
             ->success()

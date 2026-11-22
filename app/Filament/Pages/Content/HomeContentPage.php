@@ -68,6 +68,12 @@ final class HomeContentPage extends AbstractContentPage
             Blocks::section('Teaser Impression', 'impression-teaser', [
                 'heading' => 'Judul',
                 'subheading' => ['Sub-judul', 'area'],
+            ], [
+                Blocks::image(
+                    'home.impression-teaser',
+                    'Foto (opsional)',
+                    'Tampil di samping teks. Kosongkan dan foto pertama dari Weapon Variant / Era yang dipublikasikan dipakai otomatis; jika itu juga kosong, bagian ini hanya berisi teks.',
+                ),
             ]),
             Blocks::section('Dokumentasi Terbaru', 'latest-media', [
                 'heading' => 'Judul',

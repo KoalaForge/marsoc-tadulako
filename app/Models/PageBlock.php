@@ -6,8 +6,10 @@ namespace App\Models;
 
 use App\Enums\BlockLayout;
 use App\Models\Concerns\HasPublishedFlag;
+use App\Models\Concerns\InteractsWithSiteMedia;
 use App\Models\Concerns\TouchesCacheVersion;
 use MongoDB\Laravel\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\Translatable\HasTranslations;
 
 /**
@@ -26,10 +28,11 @@ use Spatie\Translatable\HasTranslations;
  * hand-rolled `{en, id}` convention on a plain array cast instead —
  * spatie does not translate nested arrays. See App\Support\Localize.
  */
-final class PageBlock extends Model
+final class PageBlock extends Model implements HasMedia
 {
     use HasPublishedFlag;
     use HasTranslations;
+    use InteractsWithSiteMedia;
     use TouchesCacheVersion;
 
     protected $connection = 'mongodb';
@@ -71,6 +74,12 @@ final class PageBlock extends Model
             // native BSON arrays/documents.
             'sort' => 'integer',
         ];
+    }
+
+    /** Optional single image for blocks that show one (e.g. home.impression-teaser). */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('image')->singleFile();
     }
 
     public static function forKey(string $blockKey): ?self

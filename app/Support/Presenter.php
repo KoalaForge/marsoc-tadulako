@@ -13,7 +13,7 @@ use App\Models\MediaItem;
 use App\Models\Personnel;
 use App\Models\Publication;
 use App\Models\WeaponVariant;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 use Spatie\MediaLibrary\HasMedia;
 
 /**
@@ -44,6 +44,9 @@ final class Presenter
             'secondaryPlatform' => $p->secondary_platform ?? '—',
             'grid' => $p->grid,
             'bio' => $p->getTranslations('bio'),
+            // Only ever published with the member's consent; null means the
+            // frontend renders no photo element at all.
+            'portrait' => $p->portrait_consent ? self::mediaUrl($p, 'portrait', 'portrait') : null,
         ];
     }
 
@@ -53,6 +56,7 @@ final class Presenter
      */
     public static function members(Collection $members): array
     {
+        $members->loadMissing('media');
         $eras = Era::query()->get()->keyBy(fn (Era $e): string => (string) $e->getKey());
 
         return $members
@@ -194,6 +198,26 @@ final class Presenter
         }
 
         return self::relativeUrl($media->hasGeneratedConversion($conversion) ? $media->getUrl($conversion) : $media->getUrl());
+    }
+
+    /**
+     * First available `photos` image (conversion `wide`) across the given
+     * models, or null — used as a fallback so a teaser fills itself once
+     * the related data has photos.
+     *
+     * @param  iterable<HasMedia>  $models
+     */
+    public static function firstPhotoUrl(iterable $models): ?string
+    {
+        foreach ($models as $model) {
+            $url = self::mediaUrl($model, 'photos', 'wide');
+
+            if ($url !== null) {
+                return $url;
+            }
+        }
+
+        return null;
     }
 
     /** @return list<string> */

@@ -25,7 +25,7 @@ trait InteractsWithSiteMedia
 
     public function registerMediaConversions(?Media $media = null): void
     {
-        $rasterCollections = ['photos', 'portrait', 'cover', 'og_image', 'banner'];
+        $rasterCollections = ['photos', 'portrait', 'cover', 'og_image', 'banner', 'image'];
 
         $this->addMediaConversion('thumb')
             ->fit(Fit::Crop, 400, 400)
@@ -44,13 +44,13 @@ trait InteractsWithSiteMedia
             ->fit(Fit::Contain, 800, 600)
             ->format('webp')
             ->quality(80)
-            ->performOnCollections('photos', 'cover', 'banner');
+            ->performOnCollections('photos', 'cover', 'banner', 'image');
 
         $this->addMediaConversion('wide')
             ->fit(Fit::Crop, 1600, 900)
             ->format('webp')
             ->quality(82)
-            ->performOnCollections('photos', 'cover', 'og_image', 'banner');
+            ->performOnCollections('photos', 'cover', 'og_image', 'banner', 'image');
 
         $this->addMediaConversion('slider')
             ->fit(Fit::Contain, 1600, 1200)

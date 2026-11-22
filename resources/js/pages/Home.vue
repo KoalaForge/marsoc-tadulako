@@ -326,9 +326,9 @@ onMounted(() => {
     </section>
 
     <!-- CHECKPOINT 6: featured impression -->
-    <section class="impression-teaser">
+    <section class="impression-teaser" :class="{ 'impression-teaser--text-only': !teaserImage }">
       <div v-if="teaserImage" class="impression-teaser__media">
-        <img :src="teaserImage" alt="Mk18 / CQBR reference platform" />
+        <img :src="teaserImage" :alt="B('impression-teaser', 'heading') || t('home.impressionTitle')" loading="lazy" />
       </div>
       <div class="impression-teaser__copy">
         <h2 class="section-title">{{ B('impression-teaser', 'heading') || t('home.impressionTitle') }}</h2>
@@ -804,6 +804,18 @@ section {
   grid-template-columns: 1fr 1fr;
   gap: var(--space-6);
   align-items: center;
+}
+
+.impression-teaser__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+/* No photo -> no media column at all: the copy simply takes the measure. */
+.impression-teaser--text-only {
+  grid-template-columns: minmax(0, var(--measure));
 }
 
 .impression-teaser__media img {

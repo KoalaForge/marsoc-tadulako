@@ -23,6 +23,7 @@ final class PageContent
         $prefix = "{$pageKey}.";
 
         return PageBlock::query()
+            ->with('media')
             ->where('page_key', $pageKey)
             ->where('is_published', true)
             ->orderBy('sort')
@@ -32,9 +33,20 @@ final class PageContent
                     ? substr($block->block_key, strlen($prefix))
                     : $block->block_key;
 
-                return [$suffix => $block->toArray()];
+                return [$suffix => [...$block->toArray(), 'image' => self::imageUrl($block)]];
             })
             ->all();
+    }
+
+    private static function imageUrl(PageBlock $block): ?string
+    {
+        $media = $block->getFirstMedia('image');
+
+        if ($media === null) {
+            return null;
+        }
+
+        return Presenter::relativeUrl($media->hasGeneratedConversion('wide') ? $media->getUrl('wide') : $media->getUrl());
     }
 
     /**
