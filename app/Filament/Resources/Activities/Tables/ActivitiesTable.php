@@ -19,7 +19,7 @@ class ActivitiesTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->defaultSort('occurred_on', 'desc')
+            ->defaultSort('created_at', 'desc')
             ->columns([
                 TextColumn::make('occurred_on')
                     ->label('Tanggal')

@@ -19,7 +19,7 @@ class WeaponVariantsTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->defaultSort('sort')
+            ->defaultSort('created_at', 'desc')
             ->columns([
                 SpatieMediaLibraryImageColumn::make('photos')
                     ->label('')
