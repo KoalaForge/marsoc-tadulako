@@ -1,0 +1,27 @@
+# Reference site file for the shared caddy-proxy.
+#
+# Copy ONCE to the server's proxy sites directory (the one mounted at
+# /etc/caddy/sites in caddy-proxy, e.g.
+# /home/koalastore/proxy/sites/marsoc-tadulako.caddy), replace {$DOMAIN}
+# with the real domain, then:
+#
+#   docker exec caddy-proxy caddy reload --config /etc/caddy/Caddyfile
+#
+# The upstream is the container NAME on proxy-network, which never changes
+# across rolling deploys, so no reload is needed on later deploys.
+
+{$DOMAIN} {
+    encode zstd gzip
+
+    header {
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        Permissions-Policy "camera=(), microphone=(), geolocation=()"
+        -Server
+        -X-Powered-By
+    }
+
+    reverse_proxy marsoc-tadulako:8080
+}

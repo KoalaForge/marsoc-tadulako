@@ -1,0 +1,170 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "about": "Tentang Kami",
+    "personnel": "Personel",
+    "impression": "Impression",
+    "activities": "Kegiatan",
+    "media": "Arsip Media",
+    "publications": "Publikasi",
+    "cta": "Report for Duty",
+    "toggle": "Buka menu navigasi"
+  },
+  "footer": {
+    "communityTitle": "Komunitas",
+    "referenceTitle": "Referensi",
+    "contactTitle": "Kontak",
+    "joinUs": "Gabung Barisan",
+    "impressionCenter": "Impression Center",
+    "whatsapp": "WhatsApp",
+    "copyright": "© {year} M.R.T — MARINE RAIDER TADULAKO"
+  },
+  "disclaimer": {
+    "full": "{strong} adalah komunitas sipil airsoft dan military impression yang independen, terinspirasi oleh MARSOC dan Marine Raiders. M.R.T bukan bagian dari, tidak berafiliasi dengan, dan tidak mewakili United States Marine Corps maupun MARSOC, serta tidak mengklaim dukungan resmi apa pun.",
+    "strong": "M.R.T"
+  },
+  "common": {
+    "reportForDuty": "Report for Duty →",
+    "readOurIdentity": "Kenali Identitas Kami",
+    "backToRoster": "← Kembali ke Roster",
+    "backToFieldLog": "← Kembali ke Field Log",
+    "backToPublications": "← Kembali ke publikasi",
+    "backToMedia": "← Kembali ke media archive",
+    "sourcesTitle": "Sumber",
+    "documentationPending": "DOKUMENTASI MENYUSUL",
+    "recordNotFound": "RECORD TIDAK DITEMUKAN",
+    "recordNotFoundDesc": "Tidak ada anggota dengan callsign ini.",
+    "eventNotFound": "KEGIATAN TIDAK DITEMUKAN",
+    "articleNotFound": "ARTIKEL TIDAK DITEMUKAN",
+    "all": "Semua"
+  },
+  "langSwitch": {
+    "en": "EN",
+    "id": "ID",
+    "ariaLabel": "Bahasa"
+  },
+  "home": {
+    "heroTitleSub": "M.R.T — Marine Raider Tadulako — komunitas airsoft impression di Sulawesi Tengah",
+    "heroTagline": "Tadulako Roots. Raider Spirit.",
+    "heroLede": "Komunitas military impression asal Indonesia yang terinspirasi oleh sejarah, tradisi, dan warisan United States Marine Forces Special Operations Command (MARSOC) — dibangun di atas tanah Sulawesi Tengah sendiri.",
+    "scrollCue": "Scroll · Checkpoint 02",
+    "latestActivitiesTitle": "Kegiatan Terbaru",
+    "allActivities": "Semua kegiatan →",
+    "syntheticActivitiesNote": "Catatan kegiatan komunitas M.R.T, diurutkan dari yang terbaru.",
+    "impressionTitle": "Impression Reference Center",
+    "impressionLede": "Era seragam, platform senjata, headgear, dan referensi loadout — bersumber, bertanggal, dan dibangun atas dasar konteks, bukan sekadar daftar belanja.",
+    "openReferenceCenter": "Buka Reference Center →",
+    "latestDocTitle": "Dokumentasi Terbaru",
+    "mediaArchiveLink": "Arsip media →",
+    "finalCtaTitle": "Siap gabung barisan?",
+    "finalCtaLede": "Pahami dulu standar dan identitas kami, lalu hubungi kami. Kami lebih suka mengobrol dulu dengan kamu daripada bertemu kamu di lapangan tanpa persiapan.",
+    "membershipProcess": "Proses Keanggotaan"
+  },
+  "fields": {
+    "memberId": "Member ID",
+    "impression": "Impression",
+    "primary": "Primary",
+    "secondary": "Secondary",
+    "joined": "Bergabung",
+    "impressionEra": "Impression Era",
+    "impressionFocus": "Impression Focus",
+    "primaryPlatform": "Primary Platform",
+    "secondaryPlatform": "Secondary Platform"
+  },
+  "personnel": {
+    "pageTitle": "Roster",
+    "pageKicker": "Personnel — catatan dinas",
+    "pageLede": "Setiap anggota M.R.T memiliki grid reference, callsign, dan fokus impresi yang dideklarasikan. Data pribadi dipublikasikan hanya dengan persetujuan masing-masing anggota.",
+    "activityParticipation": "Partisipasi Kegiatan"
+  },
+  "activities": {
+    "pageTitle": "Training, Skirmish, Milsim",
+    "pageKicker": "Activities — catatan kegiatan",
+    "pageLede": "Kegiatan komunitas airsoft dan milsim sipil M.R.T — latihan, skirmish, dan acara bersama.",
+    "overviewTitle": "Ringkasan Kegiatan",
+    "notesTitle": "Catatan Tambahan",
+    "relatedMembersTitle": "Anggota Terkait",
+    "participants": "{n} peserta"
+  },
+  "media": {
+    "pageTitle": "Dokumentasi Lapangan & Referensi",
+    "pageKicker": "Media Archive — dokumentasi",
+    "pageLede": "Dokumentasi kegiatan, tim, dan referensi equipment M.R.T. Foto referensi equipment adalah foto real-steel sebagai acuan impresi — anggota M.R.T hanya memakai replika airsoft.",
+    "relatedActivityTitle": "Kegiatan Terkait",
+    "notFound": "MEDIA TIDAK DITEMUKAN",
+    "viewInArchive": "Lihat di Media Archive",
+    "prevPhoto": "Foto sebelumnya",
+    "nextPhoto": "Foto berikutnya",
+    "zoomIn": "Perbesar",
+    "zoomOut": "Perkecil",
+    "goToPhoto": "Ke foto {n}"
+  },
+  "publications": {
+    "pageTitle": "Artikel & Catatan Lapangan",
+    "pageKicker": "Publications — editorial",
+    "pageLede": "Tulisan sejarah, referensi equipment, panduan loadout, dan laporan kegiatan dari komunitas."
+  },
+  "about": {
+    "pageTitle": "Kisah Kami, Posisi Kami",
+    "pageKicker": "About — identitas komunitas",
+    "pageLede": "Mengapa M.R.T ada, apa yang kami perjuangkan, dan di mana batas antara impresi dan klaim.",
+    "disclaimerTitle": "Disclaimer"
+  },
+  "impression": {
+    "pageTitle": "Referensi, Bukan Keharusan",
+    "pageKicker": "Impression — pusat referensi MARSOC",
+    "pageLede": "Sejarah, era seragam, platform senjata, dan referensi loadout yang dipakai anggota untuk membangun impresi MARSOC / Marine Raider yang akurat — konteks di atas checklist.",
+    "eraUniformLabel": "Uniform",
+    "eraGearLabel": "Gear",
+    "eraHelmetLabel": "Helmet",
+    "eraNoImage": "Foto Referensi Menyusul",
+    "noReferenceImage": "Foto Referensi Menyusul"
+  },
+  "join": {
+    "pageTitle": "Report for Duty",
+    "pageKicker": "Join Us — keanggotaan & rekrutmen",
+    "pageLede": "Baca dulu syarat dan standar kami. Formulir di bawah akan menyusun pesan langsung ke WhatsApp kami — tidak ada antrean formulir tanpa wajah di sini.",
+    "formTitle": "Formulir Pendaftaran",
+    "form": {
+      "fullName": "Nama Lengkap *",
+      "preferredName": "Nama Panggilan",
+      "age": "Usia",
+      "location": "Lokasi",
+      "locationPlaceholder": "Kota, provinsi",
+      "airsoftExperience": "Pengalaman Airsoft",
+      "impressionExperience": "Pengalaman Military Impression",
+      "equipmentOwnership": "Kepemilikan Equipment",
+      "equipmentPlaceholder": "Replika, seragam, protective gear yang sudah kamu miliki",
+      "motivation": "Motivasi Bergabung *",
+      "contact": "Informasi Kontak (WhatsApp / email) *",
+      "submit": "Kirim Pendaftaran via WhatsApp →",
+      "note": "Ini akan membuka WhatsApp dengan data kamu yang sudah terisi — kamu kirim sendiri, tidak ada yang disimpan di situs ini."
+    },
+    "waMessage": {
+      "heading": "M.R.T — Pendaftaran Anggota Baru",
+      "fullName": "Nama Lengkap",
+      "preferredName": "Nama Panggilan",
+      "age": "Usia",
+      "location": "Lokasi",
+      "airsoftExperience": "Pengalaman Airsoft",
+      "impressionExperience": "Pengalaman Military Impression",
+      "equipmentOwnership": "Kepemilikan Equipment",
+      "motivation": "Motivasi",
+      "contact": "Kontak"
+    },
+    "contactTitle": "Kontak"
+  },
+  "empty": {
+    "personnel": "Belum ada anggota yang dipublikasikan.",
+    "activities": "Belum ada kegiatan yang dipublikasikan.",
+    "media": "Belum ada dokumentasi yang dipublikasikan.",
+    "mediaCategory": "Belum ada isi di kategori ini.",
+    "publications": "Belum ada artikel yang dipublikasikan.",
+    "eras": "Belum ada era seragam yang dipublikasikan.",
+    "weapons": "Belum ada platform senjata yang dipublikasikan.",
+    "photos": "Belum ada foto.",
+    "related": "Belum ada data terkait.",
+    "latest": "Belum ada yang bisa ditampilkan.",
+    "list": "Belum ada isi."
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "personnel": "Personnel",
+    "impression": "Impression",
+    "activities": "Activities",
+    "media": "Media Archive",
+    "publications": "Publications",
+    "cta": "Report for Duty",
+    "toggle": "Toggle navigation"
+  },
+  "footer": {
+    "communityTitle": "Community",
+    "referenceTitle": "Reference",
+    "contactTitle": "Contact",
+    "joinUs": "Join Us",
+    "impressionCenter": "Impression Center",
+    "whatsapp": "WhatsApp",
+    "copyright": "© {year} M.R.T — MARINE RAIDER TADULAKO"
+  },
+  "disclaimer": {
+    "full": "{strong} is an independent, civilian airsoft and military-impression community inspired by MARSOC and the Marine Raiders. It is not part of, not affiliated with, and does not represent the United States Marine Corps or MARSOC, and claims no official endorsement.",
+    "strong": "M.R.T"
+  },
+  "common": {
+    "reportForDuty": "Report for Duty →",
+    "readOurIdentity": "Read Our Identity",
+    "backToRoster": "← Back to roster",
+    "backToFieldLog": "← Back to field log",
+    "backToPublications": "← Back to publications",
+    "backToMedia": "← Back to media archive",
+    "sourcesTitle": "Sources",
+    "documentationPending": "DOCUMENTATION PENDING",
+    "recordNotFound": "RECORD NOT FOUND",
+    "recordNotFoundDesc": "No member matches this callsign.",
+    "eventNotFound": "EVENT NOT FOUND",
+    "articleNotFound": "ARTICLE NOT FOUND",
+    "all": "All"
+  },
+  "langSwitch": {
+    "en": "EN",
+    "id": "ID",
+    "ariaLabel": "Language"
+  },
+  "home": {
+    "heroTitleSub": "M.R.T — Marine Raider Tadulako — an airsoft impression community in Sulawesi Tengah",
+    "heroTagline": "Tadulako Roots. Raider Spirit.",
+    "heroLede": "An Indonesian military impression community inspired by the history, traditions, and legacy of the United States Marine Forces Special Operations Command (MARSOC) — built on Sulawesi Tengah's own ground.",
+    "scrollCue": "Scroll · Checkpoint 02",
+    "latestActivitiesTitle": "Latest Activities",
+    "allActivities": "All activities →",
+    "syntheticActivitiesNote": "M.R.T community field log, newest first.",
+    "impressionTitle": "Impression Reference Center",
+    "impressionLede": "Uniform eras, weapon platforms, headgear, and loadout references — sourced, dated, and built for context over checklist.",
+    "openReferenceCenter": "Open the Reference Center →",
+    "latestDocTitle": "Latest Documentation",
+    "mediaArchiveLink": "Media archive →",
+    "finalCtaTitle": "Ready to report in?",
+    "finalCtaLede": "Read the standards, understand the identity, then reach out. We'd rather talk to you first than see you on the field unprepared.",
+    "membershipProcess": "Membership Process"
+  },
+  "fields": {
+    "memberId": "Member ID",
+    "impression": "Impression",
+    "primary": "Primary",
+    "secondary": "Secondary",
+    "joined": "Joined",
+    "impressionEra": "Impression Era",
+    "impressionFocus": "Impression Focus",
+    "primaryPlatform": "Primary Platform",
+    "secondaryPlatform": "Secondary Platform"
+  },
+  "personnel": {
+    "pageTitle": "Roster",
+    "pageKicker": "Personnel — service records",
+    "pageLede": "Every M.R.T member carries a grid reference, a callsign, and a declared impression focus. Personal data is published only with each member's consent.",
+    "activityParticipation": "Activity Participation"
+  },
+  "activities": {
+    "pageTitle": "Training, Skirmish, Milsim",
+    "pageKicker": "Activities — field log",
+    "pageLede": "Civilian airsoft and milsim community activity from M.R.T — training days, skirmishes, and joint events.",
+    "overviewTitle": "Activity Overview",
+    "notesTitle": "Additional Notes",
+    "relatedMembersTitle": "Related Members",
+    "participants": "{n} participants"
+  },
+  "media": {
+    "pageTitle": "Field & Reference Imagery",
+    "pageKicker": "Media Archive — documentation",
+    "pageLede": "Documentation of M.R.T activities, teams, and equipment references. Equipment reference photos are real-steel images used as impression guides — M.R.T members field airsoft replicas only.",
+    "relatedActivityTitle": "Related Activity",
+    "notFound": "MEDIA NOT FOUND",
+    "viewInArchive": "View in Media Archive",
+    "prevPhoto": "Previous photo",
+    "nextPhoto": "Next photo",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "goToPhoto": "Go to photo {n}"
+  },
+  "publications": {
+    "pageTitle": "Articles & Field Notes",
+    "pageKicker": "Publications — editorial",
+    "pageLede": "History write-ups, equipment references, loadout guides, and event reports from the community."
+  },
+  "about": {
+    "pageTitle": "Our Story, Our Standing",
+    "pageKicker": "About — community identity",
+    "pageLede": "Why M.R.T exists, what it stands for, and where the line sits between impression and claim.",
+    "disclaimerTitle": "Disclaimer"
+  },
+  "impression": {
+    "pageTitle": "Reference, Not Requirement",
+    "pageKicker": "Impression — MARSOC reference center",
+    "pageLede": "History, uniform eras, weapon platforms, and loadout references members use to build an accurate MARSOC / Marine Raider impression — context over checklist.",
+    "eraUniformLabel": "Uniform",
+    "eraGearLabel": "Gear",
+    "eraHelmetLabel": "Helmet",
+    "eraNoImage": "Reference Photo Pending",
+    "noReferenceImage": "Reference Photo Pending"
+  },
+  "join": {
+    "pageTitle": "Report for Duty",
+    "pageKicker": "Join Us — membership & recruitment",
+    "pageLede": "Read the eligibility and standards first. The application below drafts a message straight to our WhatsApp — there is no faceless form queue here.",
+    "formTitle": "Application Form",
+    "form": {
+      "fullName": "Full Name *",
+      "preferredName": "Preferred Name",
+      "age": "Age",
+      "location": "Location",
+      "locationPlaceholder": "City, province",
+      "airsoftExperience": "Airsoft Experience",
+      "impressionExperience": "Military Impression Experience",
+      "equipmentOwnership": "Equipment Ownership",
+      "equipmentPlaceholder": "Replica(s), uniform, protective gear you already own",
+      "motivation": "Motivation for Joining *",
+      "contact": "Contact Information (WhatsApp / email) *",
+      "submit": "Send Application via WhatsApp →",
+      "note": "This opens WhatsApp with your details pre-filled — you send it yourself, nothing is stored on this site."
+    },
+    "waMessage": {
+      "heading": "M.R.T — New Member Application",
+      "fullName": "Full Name",
+      "preferredName": "Preferred Name",
+      "age": "Age",
+      "location": "Location",
+      "airsoftExperience": "Airsoft Experience",
+      "impressionExperience": "Military Impression Experience",
+      "equipmentOwnership": "Equipment Ownership",
+      "motivation": "Motivation",
+      "contact": "Contact"
+    },
+    "contactTitle": "Contact"
+  },
+  "empty": {
+    "personnel": "No members have been published yet.",
+    "activities": "No activities have been published yet.",
+    "media": "No documentation has been published yet.",
+    "mediaCategory": "Nothing in this category yet.",
+    "publications": "No articles have been published yet.",
+    "eras": "No uniform eras have been published yet.",
+    "weapons": "No weapon platforms have been published yet.",
+    "photos": "No photos yet.",
+    "related": "No linked records.",
+    "latest": "Nothing to show yet.",
+    "list": "Nothing listed yet."
+  }
+}

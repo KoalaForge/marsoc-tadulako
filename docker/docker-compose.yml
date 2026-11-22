@@ -1,0 +1,65 @@
+# ============================================================
+# M.R.T web — Docker Compose (production)
+#
+# Joins the two EXTERNAL networks that already exist on the server:
+#   proxy-network  shared caddy-proxy reverse proxy (TLS)
+#   backend        shared services (the `redis` container lives here)
+#
+# Redis is NOT defined here: the server already runs a container named
+# `redis`; a second `container_name: redis` would collide. The app reaches
+# it by that name (REDIS_HOST=redis).
+# ============================================================
+
+services:
+  marsoc-tadulako:
+    image: ghcr.io/koalaforge/marsoc-tadulako-be:${IMAGE_TAG:-latest}
+    container_name: marsoc-tadulako
+    restart: unless-stopped
+    stop_grace_period: 60s
+    env_file: ./.env
+    environment:
+      - APP_ENV=production
+      - APP_DEBUG=false
+      - REDIS_HOST=redis
+      - RUN_MIGRATIONS=${RUN_MIGRATIONS:-true}
+      # Must live on the named volume, not inside the image.
+      - MEDIA_DB_DATABASE=/app/storage/app/media.sqlite
+    expose:
+      - "8080"
+    networks:
+      - proxy-network
+      - backend
+    volumes:
+      # Uploaded media, editor images, logs, media SQLite DB.
+      - marsoc-storage:/app/storage
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:size=128m,mode=1777
+    healthcheck:
+      test: ["CMD-SHELL", "bash /usr/local/bin/healthcheck"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      # Migrations run before the web server starts.
+      start_period: 90s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  proxy-network:
+    external: true
+  backend:
+    external: true
+
+volumes:
+  # `name:` pins the exact volume name (no project-prefix mangling): losing
+  # this volume loses every uploaded photo and the media SQLite database.
+  marsoc-storage:
+    name: marsoc-storage

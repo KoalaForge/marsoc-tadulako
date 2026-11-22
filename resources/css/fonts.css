@@ -1,0 +1,16 @@
+/* Staatliches — stamped-document display voice (headlines, section markers) */
+@import '@fontsource/staatliches/400.css';
+
+/* Archivo — grotesk body/UI voice, technical register without costume */
+@import '@fontsource/archivo/400.css';
+@import '@fontsource/archivo/400-italic.css';
+@import '@fontsource/archivo/500.css';
+@import '@fontsource/archivo/600.css';
+@import '@fontsource/archivo/700.css';
+@import '@fontsource/archivo/800.css';
+
+/* Martian Mono — coordinates, callsigns, IDs, dates: real data register */
+@import '@fontsource/martian-mono/400.css';
+@import '@fontsource/martian-mono/500.css';
+@import '@fontsource/martian-mono/600.css';
+@import '@fontsource/martian-mono/700.css';

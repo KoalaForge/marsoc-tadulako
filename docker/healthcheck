@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -e
+
+# Laravel's built-in health route (bootstrap/app.php -> health: '/up').
+if ! curl -f -s --max-time 5 http://localhost:8080/up > /dev/null 2>&1; then
+    echo "Health check failed: app not responding on :8080/up"
+    exit 1
+fi
+
+if ! supervisorctl status frankenphp 2>/dev/null | grep -q "RUNNING"; then
+    echo "Health check failed: frankenphp not running"
+    exit 1
+fi
+
+# A dead worker means uploaded images never get their conversions.
+if ! supervisorctl status queue-worker 2>/dev/null | grep -q "RUNNING"; then
+    echo "Health check failed: queue worker not running"
+    exit 1
+fi
+
+echo "Health check passed"

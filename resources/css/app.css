@@ -1,0 +1,15 @@
+/*
+ * Public-site stylesheet — hand-written CSS ported from the marsoc-tadulako-web
+ * design system (tokens.css / base.css / layout.css), not Tailwind utilities.
+ *
+ * Deliberately NOT `@import 'tailwindcss'` here: Tailwind v4 is only in this
+ * project because Filament v5 requires it for its own panel. Importing it
+ * into the public site's stylesheet pulls in Preflight, which resets
+ * h1/p/button/img and would silently fight the ported design. Tailwind stays
+ * scoped to resources/css/filament/admin/theme.css only.
+ */
+
+@import './fonts.css';
+@import './tokens.css';
+@import './base.css';
+@import './layout.css';

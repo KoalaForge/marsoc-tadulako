@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "============================================"
+echo "  M.R.T web — starting"
+echo "============================================"
+
+# Allow `docker run ... bash` / one-off commands.
+if [ "$#" -gt 0 ]; then
+    exec "$@"
+fi
+
+mkdir -p /tmp/opcache-file-cache
+
+# /app/storage is a named volume (empty on first run) — recreate the tree.
+mkdir -p \
+    /app/storage/framework/cache/data \
+    /app/storage/framework/sessions \
+    /app/storage/framework/views \
+    /app/storage/framework/testing \
+    /app/storage/logs \
+    /app/storage/app/public \
+    /app/bootstrap/cache
+
+# The medialibrary SQLite file must live on the volume (database_path() is
+# inside the image and would be lost on every deploy).
+export MEDIA_DB_DATABASE="${MEDIA_DB_DATABASE:-/app/storage/app/media.sqlite}"
+mkdir -p "$(dirname "$MEDIA_DB_DATABASE")"
+[ -f "$MEDIA_DB_DATABASE" ] || touch "$MEDIA_DB_DATABASE"
+
+# Redis is the shared `redis` container on the `backend` network.
+REDIS_HOST="${REDIS_HOST:-redis}"
+REDIS_PORT="${REDIS_PORT:-6379}"
+echo "[init] Waiting for Redis at ${REDIS_HOST}:${REDIS_PORT}..."
+RETRIES=15
+until timeout 1 bash -c "echo > /dev/tcp/${REDIS_HOST}/${REDIS_PORT}" 2>/dev/null || [ "$RETRIES" -eq 0 ]; do
+    RETRIES=$((RETRIES - 1))
+    sleep 1
+done
+[ "$RETRIES" -eq 0 ] && echo "[init] WARNING: Redis not reachable, continuing anyway..."
+
+# Single container, so there is no migration race (rolling deploy).
+if [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
+    echo "[init] Migrating MongoDB (indexes, users)..."
+    php /app/artisan migrate --force --no-interaction
+    echo "[init] Migrating media SQLite..."
+    php /app/artisan migrate --database=sqlite_media --path=database/migrations/media --force --no-interaction
+fi
+
+php /app/artisan storage:link --force --quiet 2>/dev/null || true
+php /app/artisan view:clear --quiet || true
+
+echo "[init] Caching config + routes..."
+php /app/artisan config:cache --quiet || echo "[init] WARNING: config:cache failed"
+php /app/artisan route:cache --quiet || echo "[init] WARNING: route:cache failed"
+
+echo "[init] Starting supervisor..."
+exec /usr/bin/supervisord -c /etc/supervisor/supervisord.conf

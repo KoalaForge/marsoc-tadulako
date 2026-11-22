@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+>
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Feature">
+            <directory>tests/Feature</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory>app</directory>
+        </include>
+    </source>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="APP_MAINTENANCE_DRIVER" value="file"/>
+        <env name="BCRYPT_ROUNDS" value="4"/>
+        <env name="BROADCAST_CONNECTION" value="null"/>
+        <env name="CACHE_STORE" value="array"/>
+        <env name="DB_CONNECTION" value="mongodb"/>
+        <env name="MONGODB_URI" value="mongodb://127.0.0.1:27017/marsoc_tadulako_test?retryWrites=true&amp;w=majority"/>
+        <env name="MONGODB_DATABASE" value="marsoc_tadulako_test"/>
+        <!-- A real file, not :memory: — an in-memory SQLite database is
+             scoped to a single PDO connection instance, and Laravel's
+             connection manager does not guarantee the same instance is
+             reused across the artisan migrate call in TestCase and the
+             later Spatie media queries within a request, which silently
+             drops the migrated table. -->
+        <env name="MEDIA_DB_DATABASE" value="database/media_test.sqlite"/>
+        <env name="DB_URL" value=""/>
+        <env name="MAIL_MAILER" value="array"/>
+        <env name="QUEUE_CONNECTION" value="sync"/>
+        <env name="MRT_SEED_MEDIA" value="false"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="PULSE_ENABLED" value="false"/>
+        <env name="TELESCOPE_ENABLED" value="false"/>
+        <env name="NIGHTWATCH_ENABLED" value="false"/>
+    </php>
+</phpunit>

@@ -1,0 +1,56 @@
+:root {
+  /* Brand-exact hues, read from the master logo SVG — do not drift these. */
+  --navy: #003770;
+  --red: #a00a13;
+  --white: #ffffff;
+  --gold: #ae9262;
+
+  /* Ground scale — the operations-map night field the whole site sits on. */
+  --ground-950: #040d1a;
+  --ground-900: #071a30;
+  --ground-800: #0a2544;
+  --ground-700: #0f3560;
+  --ground-line: #1c4d85;
+
+  /* Ink scale */
+  --ink-on-dark: #f3f6fa;
+  --ink-on-dark-muted: #c9d6e6;
+  --ink-gold: var(--gold);
+  --ink-gold-tint: #d8c6a4;
+  --ink-on-light: #0a1830;
+  --ink-on-light-muted: #3c5272;
+
+  /* Action */
+  --action: var(--red);
+  --action-hover: #c21420;
+  --action-ink: var(--white);
+
+  /* Grid / waypoint glow — brand-only, never neon */
+  --grid-line: rgba(216, 198, 164, 0.26);
+  --grid-line-strong: rgba(216, 198, 164, 0.5);
+  --waypoint-glow: rgba(174, 146, 98, 0.55);
+
+  /* Type */
+  --font-display: 'Staatliches', 'Arial Narrow', sans-serif;
+  --font-body: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'Martian Mono', 'Courier New', monospace;
+
+  --measure: 70ch;
+  --tracking-floor: -0.01em;
+
+  /* Spacing rhythm — 8px base */
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.25rem;
+  --space-6: 3.5rem;
+  --space-7: 5.5rem;
+  --space-8: 8.5rem;
+
+  --radius-sm: 2px;
+  --radius-md: 3px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}

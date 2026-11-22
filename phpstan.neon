@@ -1,0 +1,25 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    level: 6
+    paths:
+        - app
+    ignoreErrors:
+        # Mongo has no schema, so larastan cannot discover model attributes
+        # ($model->slug, ->callsign ...) the way it reads SQL migrations;
+        # laravel-mongodb's Model generics also do not line up with
+        # Illuminate's relation templates. Documented limits of static
+        # analysis on schemaless models, not defects.
+        - identifier: property.notFound
+        - identifier: argument.unresolvableType
+        - identifier: method.unresolvableReturnType
+        # Spatie's conversion builder is typed as the image driver, which
+        # lacks the medialibrary-only fluent methods (nonQueued, ...).
+        - identifier: method.notFound
+          path: app/Models/Concerns/InteractsWithSiteMedia.php
+        # Vendor Model::$collection is untyped; an override must stay untyped.
+        - identifier: missingType.property
+          path: app/Models/*
+        # collect()/Cache::remember() template inference on closures.
+        - identifier: argument.templateType
